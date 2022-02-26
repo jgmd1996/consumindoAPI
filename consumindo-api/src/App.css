@@ -1,0 +1,8 @@
+.item {
+    width: 500px;
+    padding: 1em;
+    margin: 1em;
+    border: 10px solid black;
+    display: flex;
+    justify-content: space-around;
+}
