@@ -32,7 +32,8 @@ import ListaUsuarioDaAPI from './pages/ListaUsuarioDaAPI'
 function App (){
     return(
     <div className="App" id="root">
-        <ListaUsuarioDaAPI/>
+        <ListaUsuarioDaAPI></ListaUsuarioDaAPI>
+        <h1>ola</h1>
     </div>
     );
 }

@@ -1,7 +1,7 @@
 import produce from 'immer'
 
 const INITIAL_STATE ={
-    customer: {},
+    itens: {},
 };
 
 console.log(INITIAL_STATE)
@@ -10,7 +10,7 @@ function shop (state = INITIAL_STATE, action) {
     switch (action.type) {
         case 'SET_CUSTOMER': {
             return produce(state, (draft)=>{
-                draft.customer =action.customer;
+                draft.itens =action.itens;
             })
         }
 
