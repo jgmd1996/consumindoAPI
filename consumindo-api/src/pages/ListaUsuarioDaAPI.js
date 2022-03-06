@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from "react-redux";
+//import { useDispatch, useSelector } from "react-redux";
 
 
 
@@ -8,10 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 
         //tela cadastro
-        const { itens: cu } = useSelector(state => state.shop)
-        const dispatch = useDispatch();
+       // const { itens: cu } = useSelector(state => state.shop)
+       // const dispatch = useDispatch();
         // final de cadastro
-        const [itens, setItens] = useState({
+        const [itens, setItens] = useState([])
+        const [user, setUser] = useState({
             
             login: '',
             id: '',
@@ -37,50 +38,58 @@ import { useDispatch, useSelector } from "react-redux";
 
 
         useEffect(() => {
-            const fetchData = async () => {
-                const result = await fetch('https://api.github.com/users/bmizerany/followers')
-                    .then(response => response.json())
-                    .then(data => data)
-
-                setItens(result)
+            async function fetchMyAPI() {
+              let response = await fetch(`https://api.github.com/users`)
+              const users = await response.json()
+              setItens(users)
+              console.log(users)
             }
-            fetchData()
-        }, [cu])
+        
+            fetchMyAPI()
+          }, [])
 
-        const goToCheckout = () => {
-            dispatch({ type: 'SET_CUSTOMER', itens });
-        }
+        // const goToCheckout = () => {
+        //     dispatch({ type: 'SET_CUSTOMER', itens });
+        // }
         console.log(itens)
         return (
             <div className="App">
+                <table style={{border: "1px solid"}}>
+                    <th>login</th>
+                    <th>id</th>
+                    <th>node_id</th>
                 {itens.map(item => {
-                    return <div>
-                        <span>{item.login}</span><br />
-                        <span>{item.id}</span><br />
-                        <span>{item.node_id}</span><br />
-                        <span>{item.avatar_url}</span><br />
-                        <span>{item.gravatar_id}</span><br />
-                        <span>{item.url}</span><br />
-                        <span>{item.html_url}</span><br />
-                        <span>{item.followers_url}</span><br />
-                        <span>{item.following_url}</span><br />
-                        <span>{item.gists_url}</span><br />
-                        <span>{item.starred_url}</span><br />
-                        <span>{item.subscriptions_url}</span><br />
-                        <span>{item.organizations_url}</span><br />
-                        <span>{item.repos_url}</span><br />
-                        <span>{item.events_url}</span><br />
-                        <span>{item.received_events_url}</span><br />
-                        <span>{item.type}</span><br />
-                        <span>{item.site_admin}</span><br />
-                    </div>
+                    //lista todas as linha e colunas 
+                    return <tr style={{border: "1px solid"}}>
+                        <td style={{border: "1px solid"}}>{item.login}</td>
+                        <td style={{border: "1px solid"}}>{item.id}</td>
+                        <td style={{border: "1px solid"}}>{item.node_id}</td>
+                        <td><img width={"100"} height={"100"} src={item.avatar_url}/></td>
+                        <td>{item.gravatar_id}</td>
+                        <td>{item.url}</td>
+                        <td>{item.html_url}</td>
+                        <td>{item.followers_url}</td>
+                        <td>{item.following_url}</td>
+                        <td>{item.gists_url}</td>
+                        <td>{item.starred_url}</td>
+                        <td>{item.subscriptions_url}</td>
+                        <td>{item.organizations_url}</td>
+                        <td>{item.repos_url}</td>
+                        <td>{item.events_url}</td>
+                        <td>{item.received_events_url}</td>
+                        <td>{item.type}</td>
+                        <td>{item.site_admin}</td>
+                    </tr>
 
                 })}
+                </table>
+
+
                 <div className="clo-6">
                     <h2 className="text-center">
                         Registrar novo usuario do gitHub
                     </h2>
-                    <br />
+                    
 
                     <input
                         type="text"
@@ -90,7 +99,7 @@ import { useDispatch, useSelector } from "react-redux";
                             setItens({ ...itens, login: e.target.value });
                         }}
                     />
-                    <br />
+                    
 
                     <input
                         type="text"
@@ -100,7 +109,7 @@ import { useDispatch, useSelector } from "react-redux";
                             setItens({ ...itens, id: e.target.value });
                         }}
                     />
-                    <br />
+                    
 
                     <input
                         type="text"
@@ -110,7 +119,7 @@ import { useDispatch, useSelector } from "react-redux";
                             setItens({ ...itens, node_id: e.target.value });
                         }}
                     />
-                    <br />
+                    
 
                     <input
                         type="text"
@@ -120,7 +129,7 @@ import { useDispatch, useSelector } from "react-redux";
                             setItens({ ...itens, avatar_url: e.target.value });
                         }}
                     />
-                    <br />
+                    
 
                     <input
                         type="text"
@@ -130,7 +139,7 @@ import { useDispatch, useSelector } from "react-redux";
                             setItens({ ...itens, gravatar_id: e.target.value });
                         }}
                     />
-                    <br />
+                    
                     <input
                         type="text"
                         className="form-control form-control-lg mb-3"
@@ -139,7 +148,7 @@ import { useDispatch, useSelector } from "react-redux";
                             setItens({ ...itens, url: e.target.value });
                         }}
                     />
-                    <br />
+                    
                     <input
                         type="text"
                         className="form-control form-control-lg mb-3"
@@ -148,7 +157,7 @@ import { useDispatch, useSelector } from "react-redux";
                             setItens({ ...itens, html_url: e.target.value });
                         }}
                     />
-                    <br />
+                    
                     <input
                         type="text"
                         className="form-control form-control-lg mb-3"
@@ -157,7 +166,7 @@ import { useDispatch, useSelector } from "react-redux";
                             setItens({ ...itens, followers_url: e.target.value });
                         }}
                     />
-                    <br />
+                    
                     <input
                         type="text"
                         className="form-control form-control-lg mb-3"
@@ -166,7 +175,7 @@ import { useDispatch, useSelector } from "react-redux";
                             setItens({ ...itens, following_url: e.target.value });
                         }}
                     />
-                    <br />
+                    
                     <input
                         type="text"
                         className="form-control form-control-lg mb-3"
@@ -175,7 +184,7 @@ import { useDispatch, useSelector } from "react-redux";
                             setItens({ ...itens, gists_url: e.target.value });
                         }}
                     />
-                    <br />
+                    
                     <input
                         type="text"
                         className="form-control form-control-lg mb-3"
@@ -184,7 +193,7 @@ import { useDispatch, useSelector } from "react-redux";
                             setItens({ ...itens, starred_url: e.target.value });
                         }}
                     />
-                    <br />
+                    
                     <input
                         type="text"
                         className="form-control form-control-lg mb-3"
@@ -193,7 +202,7 @@ import { useDispatch, useSelector } from "react-redux";
                             setItens({ ...itens, subscriptions_url: e.target.value });
                         }}
                     />
-                    <br />
+                    
                     <input
                         type="text"
                         className="form-control form-control-lg mb-3"
@@ -202,7 +211,7 @@ import { useDispatch, useSelector } from "react-redux";
                             setItens({ ...itens, organizations_url: e.target.value });
                         }}
                     />
-                    <br />
+                    
                     <input
                         type="text"
                         className="form-control form-control-lg mb-3"
@@ -211,7 +220,7 @@ import { useDispatch, useSelector } from "react-redux";
                             setItens({ ...itens, repos_url: e.target.value });
                         }}
                     />
-                    <br />
+                    
                     <input
                         type="text"
                         className="form-control form-control-lg mb-3"
@@ -220,7 +229,7 @@ import { useDispatch, useSelector } from "react-redux";
                             setItens({ ...itens, events_url: e.target.value });
                         }}
                     />
-                    <br />
+                    
                     <input
                         type="text"
                         className="form-control form-control-lg mb-3"
@@ -229,7 +238,7 @@ import { useDispatch, useSelector } from "react-redux";
                             setItens({ ...itens, received_events_url: e.target.value });
                         }}
                     />
-                    <br />
+                    
                     <input
                         type="text"
                         className="form-control form-control-lg mb-3"
@@ -238,7 +247,7 @@ import { useDispatch, useSelector } from "react-redux";
                             setItens({ ...itens, type: e.target.value });
                         }}
                     />
-                    <br />
+                    
                     <input
                         type="text"
                         className="form-control form-control-lg mb-3"
@@ -247,10 +256,10 @@ import { useDispatch, useSelector } from "react-redux";
                             setItens({ ...itens, site_admin: e.target.value });
                         }}
                     />
-                    <br />
-                    <button onClick={() => goToCheckout()} className="btn btn-lg btn-block btn-secondary">
+                    
+                    {/* <button onClick={() => goToCheckout()} className="btn btn-lg btn-block btn-secondary">
                         finalizar pedido
-                    </button>
+                    </button> */}
 
 
                 </div>
