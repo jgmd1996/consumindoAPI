@@ -1,16 +1,16 @@
 import produce from 'immer'
 
 const INITIAL_STATE ={
-    itens: {},
+    usuarioCadastrado: {},
 };
 
-console.log(INITIAL_STATE)
+console.log(INITIAL_STATE,"valor inicial")
 
-function shop (state = INITIAL_STATE, action) {
+function usuarioCadastrado (state = INITIAL_STATE, action) {
     switch (action.type) {
         case 'SET_CUSTOMER': {
             return produce(state, (draft)=>{
-                draft.itens =action.itens;
+                draft.usuarioCadastrado =action.usuarioCadastrado;
             })
         }
 
@@ -20,4 +20,4 @@ function shop (state = INITIAL_STATE, action) {
 
 }
 
-export default shop;
+export default usuarioCadastrado;

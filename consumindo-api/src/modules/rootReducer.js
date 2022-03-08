@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 
-import shop from "../Shop/reducer";
+import usuarioCadastrado from "../Itens/reducer";
 
 export default combineReducers({
-    shop,
+    usuarioCadastrado,
 });
